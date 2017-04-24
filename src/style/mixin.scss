@@ -1,16 +1,16 @@
-$blue: #3190e8;  
-$bc: #e4e4e4;
+$blue: #0096ff;
+$bc: #eee;
 $fc:#fff;
 
 // 背景图片地址和大小
-@mixin bis($url) { 
+@mixin bis($url) {
 	background-image: url($url);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
 
 //定位上下左右居中
-@mixin center {  
+@mixin center {
 	position: absolute;
 	top: 50%;
     left: 50%;
@@ -18,14 +18,14 @@ $fc:#fff;
 }
 
 //定位上下居中
-@mixin ct {  
+@mixin ct {
 	position: absolute;
 	top: 50%;
     transform: translateY(-50%);
 }
 
 //定位上下居中
-@mixin cl {  
+@mixin cl {
 	position: absolute;
 	left: 50%;
     transform: translateX(-50%);
@@ -38,7 +38,7 @@ $fc:#fff;
 }
 
 //字体大小、行高、字体
-@mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
 	font: #{$size}/#{$line-height} $family;
 }
 
@@ -50,7 +50,19 @@ $fc:#fff;
 
 //flex 布局和 子元素 对其方式
 @mixin fj($type: space-between){
-	display: flex;
-	justify-content: $type;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: $type;
+  -ms-flex-pack: justify;
+  justify-content: $type;
+}
 
+@mixin ai($position: center){
+  -webkit-box-align: $position;
+  -webkit-align-items: $position;
+  -ms-flex-align: $position;
+  align-items: $position;
 }

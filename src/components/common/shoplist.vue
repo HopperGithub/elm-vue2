@@ -196,7 +196,7 @@ export default {
 		}
 		.rating_order_num{
 			@include fj(space-between);
-			height: 0.6rem;
+      height: 0.85rem;
 			margin-top: 0.52rem;
 			.rating_order_num_left{
 				@include fj(flex-start);

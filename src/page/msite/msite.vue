@@ -4,20 +4,56 @@
       <div class="msite-title-row" slot="msite-title-row">
         <router-link to="/home" class="msite-title">
           <svg class="location">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location"></use>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location" fill="#fff"></use>
           </svg>
           <span class="title_text ellipsis">{{msietTitle}}</span>
         </router-link>
         <aside class="air-show">
-          <div><h2 class="index-17uRU">22°</h2>
-            <p class="index-3-P-K">多云天</p></div>
+          <div>
+            <h2>22°</h2>
+            <p>多云天</p>
+          </div>
           <img alt="天气图标" class="index-wRPUE"
                src="//fuss10.elemecdn.com/2/52/5383cfd55c8ba454449f63f54ce2apng.png?imageMogr/format/webp/thumbnail/!69x69r/gravity/Center/crop/69x69/">
         </aside>
       </div>
       <router-link :to="'/search/' + geohash" class="link_search" slot="search">
-        <form action=""><input type="text" placeholder="搜索商家、商品" aria-label="搜索商家、商品" class="food-search"></form>
+        <form action="">
+          <input type="text" placeholder="搜索商家、商品" aria-label="搜索商家、商品" class="food-search">
+        </form>
       </router-link>
+      <div class="recommend-shop" slot="recommend-shop">
+        <a href="/search/#/shop?keyword=%E5%98%89%E5%92%8C%E4%B8%80%E5%93%81&amp;geohash=wx4ermccnuqk">
+          嘉和一品
+        </a>
+        <a href="/search/#/shop?keyword=%E5%90%88%E5%88%A9%E5%B1%8B&amp;geohash=wx4ermccnuqk">
+          合利屋
+        </a>
+        <a href="/search/#/shop?keyword=%E6%98%9F%E5%B7%B4%E5%85%8B&amp;geohash=wx4ermccnuqk">
+          星巴克
+        </a>
+        <a href="/search/#/shop?keyword=%E6%9E%9C%E5%A4%9A%E7%BE%8E&amp;geohash=wx4ermccnuqk">
+          果多美
+        </a>
+        <a href="/search/#/shop?keyword=%E5%B7%9D%E6%B8%9D%E7%BE%8E%E9%A3%9F&amp;geohash=wx4ermccnuqk">
+          川渝美食
+        </a>
+        <a href="/search/#/shop?keyword=%E5%A4%A7%E6%8B%87%E6%8C%87&amp;geohash=wx4ermccnuqk">
+          大拇指
+        </a>
+        <a href="/search/#/shop?keyword=%E8%82%AF%E5%BE%B7%E5%9F%BA&amp;geohash=wx4ermccnuqk">
+          肯德基
+        </a>
+        <a href="/search/#/shop?keyword=%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85&amp;geohash=wx4ermccnuqk">
+          麻辣香锅
+        </a>
+        <a href="/search/#/shop?keyword=%E7%B2%A5&amp;geohash=wx4ermccnuqk">
+          粥
+        </a>
+        <a href="/search/#/shop?keyword=%E9%BB%84%E7%84%96%E9%B8%A1&amp;geohash=wx4ermccnuqk">
+          黄焖鸡
+        </a>
+      </div>
     </head-top>
     <nav class="msite_nav">
       <div class="swiper-container">
@@ -41,7 +77,7 @@
         <svg class="shop_icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop"></use>
         </svg>
-        <span class="shop_header_title">附近商家</span>
+        <span class="shop_header_title">推荐商家</span>
       </header>
       <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
     </div>
@@ -129,86 +165,91 @@
   @import '../../style/mixin';
 
   .msite-title-row {
+    height: .92rem;
+    padding-bottom: 1.28rem;
 
     .msite-title {
-      //@include center;
       width: 80%;
       color: #fff;
-      //text-align: center;
-      margin-left: -0.5rem;
-
       .location {
-        @include wh(0.3rem, 0.4rem);
+        @include wh(.6rem, .9rem);
         fill: #fff;
-        //display: inline-block;
       }
 
       .title_text {
-        @include sc(0.6rem, #fff);
-        text-align: center;
+        @include sc(0.78rem, #fff);
         width: 60%;
         display: inline-block;
+        max-width: 80%;
       }
-
     }
 
     .air-show {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
+      @include ai(center);
+      @include fj(space-between);
       color: #fff;
+      float: right;
       h2 {
-        font-size: .373333rem;
-        color: #fff;
+        @include sc(0.6rem, #fff);
       }
       p {
-        font-size: .266667rem;
-        color: #fff;
+        display: none;
+        @include sc(0.1rem, #fff);
       }
       img {
-        margin-left: .106667rem;
-        width: .733333rem;
-        height: .733333rem;
-        max-width: 100%;
+        fill: #fff;
+        padding: 0.15rem;
+        @include wh(0.98rem, 0.98rem);
       }
     }
   }
 
   .link_search {
-    //left: 0.8rem;
-    //@include wh(0.8rem, 0.9rem);
-    //@include ct;
     .food-search {
-      display: block;
-      margin: .2rem 0;
-      width: 100%;
-      height: .96rem;
+      margin: .25rem 0;
       text-align: center;
       border-radius: .96rem;
       box-shadow: 0 0.026667rem 0.066667rem 0 rgba(0, 0, 0, .2);
       color: #333;
       font-size: .346667rem;
+      @include wh(100%, 1.55rem);
+    }
+  }
+
+  .recommend-shop{
+    @include fj(space-between);
+    @include ai(center);
+    white-space: nowrap;
+    overflow-x: auto;
+
+    a{
+      @include sc(0.4rem, #fff);
+      margin-right: .48rem;
     }
   }
 
   .msite_nav {
-    padding-top: 2.1rem;
     background-color: #fff;
-    border-bottom: 0.025rem solid $bc;
+    border-bottom: 1px solid $bc;
 
     .swiper-container {
       @include wh(100%, auto);
       padding-bottom: 0.6rem;
 
       .swiper-pagination {
-        bottom: 0.2rem;
+        bottom: 0.05rem;
       }
 
+      .swiper-pagination-bullet-active {
+        background: #000;
+        opacity: .6;
+      }
+
+      .swiper-pagination-bullet {
+        margin: 0 .066667rem;
+        width: 5px;
+        height: 5px;
+      }
     }
   }
 
@@ -219,17 +260,15 @@
     .link_to_food {
       width: 25%;
       padding: 0.3rem 0rem;
-      @include fj(center);
-
+      text-align: center;
       figure {
 
         img {
-          margin-bottom: 0.3rem;
+          //margin-bottom: 0.3rem;
           @include wh(1.8rem, 1.8rem);
         }
 
         figcaption {
-          text-align: center;
           @include sc(0.55rem, #666);
         }
 
@@ -243,7 +282,7 @@
     background-color: #fff;
 
     .shop_header {
-
+      
       .shop_icon {
         fill: #999;
         margin-left: 0.6rem;
@@ -252,10 +291,10 @@
       }
 
       .shop_header_title {
-        color: #999;
-        @include font(0.55rem, 1.6rem);
+        color: #333;
+        font-weight: bold !important;
+        @include font(0.65rem, 0.65rem, 'PingFangSC-Regular');
       }
-
     }
   }
 
