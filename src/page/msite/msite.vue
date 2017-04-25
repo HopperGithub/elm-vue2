@@ -282,7 +282,7 @@
     background-color: #fff;
 
     .shop_header {
-      
+
       .shop_icon {
         fill: #999;
         margin-left: 0.6rem;
