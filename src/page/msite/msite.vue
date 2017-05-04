@@ -8,13 +8,13 @@
           </svg>
           <span class="title_text ellipsis">{{msietTitle}}</span>
         </router-link>
-        <aside class="air-show">
+        <aside class="weather">
           <div>
-            <h2>22°</h2>
-            <p>多云天</p>
+            <h2>{{ weather.temperature }}</h2>
+            <p>{{ weather.desc }}</p>
           </div>
-          <img alt="天气图标" class="index-wRPUE"
-               src="//fuss10.elemecdn.com/2/52/5383cfd55c8ba454449f63f54ce2apng.png?imageMogr/format/webp/thumbnail/!69x69r/gravity/Center/crop/69x69/">
+          <img alt="天气图标" v-if="weather.image_url"
+               :src="imgBaseUrl + weather.image_url">
         </aside>
       </div>
       <router-link :to="'/search/' + geohash" class="link_search" slot="search">
@@ -22,37 +22,12 @@
           <input type="text" placeholder="搜索商家、商品" aria-label="搜索商家、商品" class="food-search">
         </form>
       </router-link>
-      <div class="recommend-shop" slot="recommend-shop">
-        <a href="/search/#/shop?keyword=%E5%98%89%E5%92%8C%E4%B8%80%E5%93%81&amp;geohash=wx4ermccnuqk">
-          嘉和一品
-        </a>
-        <a href="/search/#/shop?keyword=%E5%90%88%E5%88%A9%E5%B1%8B&amp;geohash=wx4ermccnuqk">
-          合利屋
-        </a>
-        <a href="/search/#/shop?keyword=%E6%98%9F%E5%B7%B4%E5%85%8B&amp;geohash=wx4ermccnuqk">
-          星巴克
-        </a>
-        <a href="/search/#/shop?keyword=%E6%9E%9C%E5%A4%9A%E7%BE%8E&amp;geohash=wx4ermccnuqk">
-          果多美
-        </a>
-        <a href="/search/#/shop?keyword=%E5%B7%9D%E6%B8%9D%E7%BE%8E%E9%A3%9F&amp;geohash=wx4ermccnuqk">
-          川渝美食
-        </a>
-        <a href="/search/#/shop?keyword=%E5%A4%A7%E6%8B%87%E6%8C%87&amp;geohash=wx4ermccnuqk">
-          大拇指
-        </a>
-        <a href="/search/#/shop?keyword=%E8%82%AF%E5%BE%B7%E5%9F%BA&amp;geohash=wx4ermccnuqk">
-          肯德基
-        </a>
-        <a href="/search/#/shop?keyword=%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85&amp;geohash=wx4ermccnuqk">
-          麻辣香锅
-        </a>
-        <a href="/search/#/shop?keyword=%E7%B2%A5&amp;geohash=wx4ermccnuqk">
-          粥
-        </a>
-        <a href="/search/#/shop?keyword=%E9%BB%84%E7%84%96%E9%B8%A1&amp;geohash=wx4ermccnuqk">
-          黄焖鸡
-        </a>
+      <div class="hot-search-word" slot="hot-search-word">
+        <router-link
+          :to="{path: '/search', query: {geohash, keyword: item.search_word}}"
+          v-for="(item, index) in hotWords" :key="index" class="link_to_food">
+          {{item.word}}
+        </router-link>
       </div>
     </head-top>
     <nav class="msite_nav">
@@ -86,12 +61,18 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
+  import {mapMutations, mapState} from 'vuex'
   import {imgBaseUrl} from '../../config/env'
   import headTop from '../../components/header/head'
   import footGuide from '../../components/footer/footGuide'
   import shopList from '../../components/common/shoplist'
-  import {msiteAdress, msiteFoodTypes, msiteShopList} from '../../service/getData'
+  import {
+    msiteAdress,
+    msiteFoodTypes,
+    msiteShopList,
+    msiteCurrentWeather,
+    msiteHotSearchWord
+  } from '../../service/getData'
   import '../../plugins/swiper.min.js'
   import '../../style/swiper.min.css'
 
@@ -103,6 +84,8 @@
         foodTypes: [], // 食品分类列表
         hasGetData: false, //是否已经获取地理位置数据，成功之后再获取商铺列表信息
         imgBaseUrl, //图片域名地址
+        weather: {}, // 天气信息数据
+        hotWords: [], // 搜索热词列表
       }
     },
     async beforeMount(){
@@ -112,9 +95,21 @@
       //获取位置信息
       let res = await msiteAdress(this.geohash);
       this.msietTitle = res.name;
-
+      this.latitude = res.latitude;
+      this.longitude = res.longitude;
       // 记录当前经度纬度
       this.RECORD_ADDRESS(res);
+
+      let hotSearchWord = await msiteHotSearchWord(this.latitude, this.longitude);
+      this.hotWords = hotSearchWord.concat([]);
+
+      let weather = await msiteCurrentWeather(this.latitude, this.longitude);
+      let path1 = weather.image_hash.slice(0, 1);
+      let path2 = weather.image_hash.slice(1, 3);
+      let path3 = weather.image_hash.slice(3);
+      this.weather.temperature = weather.temperature + '°';
+      this.weather.desc = weather.description;
+      this.weather.image_url = '/' + path1 + '/' + path2 + '/' + path3 + '.png';
 
       this.hasGetData = true;
     },
@@ -132,7 +127,11 @@
         //初始化swiper
         new Swiper('.swiper-container', {
           pagination: '.swiper-pagination',
-          loop: true
+          effect: 'flip',
+          loop: true,
+          paginationBulletRender: function (swiper, index, className) {
+            return '<span style="width:4px;height: 4px;margin:0 3px;background-color: #000" class="' + className + '" ></span>';
+          }
         });
       })
     },
@@ -141,7 +140,11 @@
       shopList,
       footGuide,
     },
-    computed: {},
+    computed: {
+      ...mapState([
+        'latitude', 'longitude'
+      ]),
+    },
     methods: {
       ...mapMutations([
         'RECORD_ADDRESS', 'SAVE_GEOHASH'
@@ -184,7 +187,7 @@
       }
     }
 
-    .air-show {
+    .weather {
       @include ai(center);
       @include fj(space-between);
       color: #fff;
@@ -198,8 +201,8 @@
       }
       img {
         fill: #fff;
-        padding: 0.15rem;
-        @include wh(0.98rem, 0.98rem);
+        padding: 0rem;
+        @include wh(1.2rem, 1.2rem);
       }
     }
   }
@@ -216,13 +219,13 @@
     }
   }
 
-  .recommend-shop{
+  .hot-search-word {
     @include fj(space-between);
     @include ai(center);
     white-space: nowrap;
     overflow-x: auto;
 
-    a{
+    a {
       @include sc(0.4rem, #fff);
       margin-right: .48rem;
     }
@@ -238,17 +241,6 @@
 
       .swiper-pagination {
         bottom: 0.05rem;
-      }
-
-      .swiper-pagination-bullet-active {
-        background: #000;
-        opacity: .6;
-      }
-
-      .swiper-pagination-bullet {
-        margin: 0 .066667rem;
-        width: 5px;
-        height: 5px;
       }
     }
   }

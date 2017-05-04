@@ -60,6 +60,22 @@ export const msiteFoodTypes = geohash => fetch('GET', '/v2/index_entry', {
 });
 
 /**
+ * 获取msite页面当前天气
+ */
+export const msiteCurrentWeather = (latitude, longitude) => fetch('GET', 'bgs/weather/current', {
+  latitude,
+  longitude,
+});
+
+/**
+ * 获取msite页面搜索热词
+ */
+export const msiteHotSearchWord = (latitude, longitude) => fetch('GET', 'shopping/v3/hot_search_words', {
+  latitude,
+  longitude,
+});
+
+/**
  * 获取msite商铺列表
  */
 export const shopList = (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '', order_by = '', delivery_mode = '', support_ids = []) => {

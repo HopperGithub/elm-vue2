@@ -11,7 +11,7 @@
     <section class="title_head ellipsis" v-if="headTitle">
       <span class="title_text">{{headTitle}}</span>
     </section>
-    <slot name="recommend-shop"></slot>
+    <slot name="hot-search-word"></slot>
     <slot name="changecity"></slot>
     <slot name="changeLogin"></slot>
   </header>
@@ -30,7 +30,7 @@
     mounted(){
 
     },
-    props: ['signinUp', 'headTitle', 'goBack'],
+    props: ['headTitle', 'goBack'],
     computed: {
       ...mapState([
         'userInfo'
@@ -64,6 +64,15 @@
     left: 0.4rem;
     @include wh(0.6rem, 0.8rem);
     @include ct;
+    .arrowLeft{
+      width: .906667rem;
+      fill: #fff;
+      padding: .133333rem;
+      font-size: .373333rem;
+      font-weight: lighter;
+      height: .8rem;
+      margin-top: .066667rem;
+    }
   }
 
   .head_login {

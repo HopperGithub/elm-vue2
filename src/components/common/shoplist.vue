@@ -44,11 +44,16 @@
 			</router-link>
 		</ul>
 		<p v-else class="empty_data">没有更多了</p>
-		<aside class="return_top" @click="backTop" v-if="showBackStatus">
-			<svg class="back_top_svg">
-				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
-			</svg>
-		</aside>
+		<!--<aside class="return_top" @click="backTop" v-if="showBackStatus">-->
+			<!--<svg class="back_top_svg">-->
+				<!--<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>-->
+			<!--</svg>-->
+		<!--</aside>-->
+    <div class="back_top_wrapper" @click="backTop" v-if="showBackStatus">
+      <svg class="back_top_icon">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
+      </svg>
+    </div>
 		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
 		<div ref="abc" style="background-color: red;"></div>
 		<transition name="loading">
@@ -119,7 +124,7 @@ export default {
 		},
 		//返回顶部
 		backTop(){
-			animate(document.body, {scrollTop: '0'}, 400,'ease-out');
+			animate(document.body, {scrollTop: '0'}, 100, 'ease-out');
 		},
 		//监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
 		async listenPropChange(){
@@ -264,7 +269,37 @@ export default {
 		.back_top_svg{
 			@include wh(2rem, 2rem);
 		}
+
 	}
+  .back_top_wrapper{
+    position: fixed;
+    bottom: 3rem;
+    right: 1rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    border: 1px solid #999;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+    .back_top_icon{
+      display: block;
+      fill: #999;
+      @include wh(2rem, 2rem);
+    }
+  }
+
 	.loading-enter-active, .loading-leave-active {
 		transition: opacity 1s
 	}
