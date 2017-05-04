@@ -130,7 +130,7 @@
           effect: 'flip',
           loop: true,
           paginationBulletRender: function (swiper, index, className) {
-            return '<span style="width:4px;height: 4px;margin:0 3px;background-color: #000" class="' + className + '" ></span>';
+            return '<span style="width:4px;height: 4px;margin:0 3px;background-color: #000;" class="' + className + '" ></span>';
           }
         });
       })
@@ -227,7 +227,7 @@
 
     a {
       @include sc(0.4rem, #fff);
-      margin-right: .48rem;
+      margin-right: .58rem;
     }
   }
 
@@ -274,6 +274,8 @@
     background-color: #fff;
 
     .shop_header {
+      border-bottom: 0.025rem solid #f1f1f1;
+      padding: .2rem 0;
 
       .shop_icon {
         fill: #999;

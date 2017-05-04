@@ -14,7 +14,7 @@
     export default {
       data(){
             return{
-    
+
             }
         },
         created(){
@@ -27,14 +27,14 @@
         },
         props:[],
         methods: {
-            
+
         }
     }
 </script>
-  
-<style lang="scss" scoped>
+
+<style lang="scss" rel="stylesheet/scss" scoped>
     @import '../../style/mixin';
-  
+
     .rating_page{
         position: absolute;
         top: 0;
@@ -43,10 +43,10 @@
         bottom: 0;
         background-color: #fff;
         z-index: 202;
-        padding-top: 1.95rem;
+        //padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
     }
-    
+
 </style>

@@ -39,10 +39,10 @@
         }
     }
 </script>
-  
-<style lang="scss" scoped>
+
+<style lang="scss" rel="stylesheet/scss" scoped>
     @import '../../../style/mixin';
-  
+
     .rating_page{
         position: fixed;
         top: 0;
@@ -51,7 +51,7 @@
         bottom: 0;
         background-color: #f5f5f5;
         z-index: 204;
-        padding-top: 1.95rem;
+        //padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
@@ -83,5 +83,5 @@
         border-radius: 0.2rem;
         margin-top: 0.5rem;
     }
-    
+
 </style>

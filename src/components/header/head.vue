@@ -51,27 +51,33 @@
 
   #head_top {
     background-color: $blue;
-    //position: fixed;
     padding: .42rem 0.55rem;
     z-index: 100;
     left: 0;
     top: 0;
-    //@include wh(100%, 2.95rem);
   }
 
-
   .head_goback {
-    left: 0.4rem;
-    @include wh(0.6rem, 0.8rem);
-    @include ct;
-    .arrowLeft{
-      width: .906667rem;
-      fill: #fff;
-      padding: .133333rem;
-      font-size: .373333rem;
-      font-weight: lighter;
-      height: .8rem;
-      margin-top: .066667rem;
+    @include wh(1.25rem, 1.25rem);
+    @include sc(0.45rem, #fff);
+    display: inline-flex;
+    padding: 0.25rem;
+    //vertical-align: middle;
+  }
+
+  .title_head {
+    position: absolute;
+    top: 0;
+    margin-top: 1.1rem;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    .title_text{
+      @include sc(0.9rem, #fff);
+      font-weight: 700;
     }
   }
 
@@ -85,18 +91,6 @@
     .user_avatar {
       fill: #fff;
       @include wh(.8rem, .8rem);
-    }
-  }
-
-  .title_head {
-    @include center;
-    width: 50%;
-    color: #fff;
-    text-align: center;
-    .title_text {
-      @include sc(0.6rem, #fff);
-      text-align: center;
-      font-weight: bold;
     }
   }
 </style>

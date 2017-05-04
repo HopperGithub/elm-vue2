@@ -14,11 +14,11 @@
                     <header>
                         <span>{{item.name}}</span>
                         <span>{{item.sex == 1? '先生' : '女士'}}</span>
-                        <span>{{item.phone}}</span>   
+                        <span>{{item.phone}}</span>
                     </header>
                     <div class="address_detail ellipsis">
                         <span v-if="item.tag" :style="{backgroundColor: iconColor(item.tag)}">{{item.tag}}</span>
-                        <p>{{item.address_detail}}</p>   
+                        <p>{{item.address_detail}}</p>
                     </div>
                 </div>
             </li>
@@ -34,11 +34,11 @@
                         <header>
                             <span>{{item.name}}</span>
                             <span>{{item.sex == 1? '先生' : '女士'}}</span>
-                            <span>{{item.phone}}</span>   
+                            <span>{{item.phone}}</span>
                         </header>
                         <div class="address_detail ellipsis">
                             <span v-if="item.tag" :style="{backgroundColor: '#ccc'}">{{item.tag}}</span>
-                            <p>{{item.address_detail}}</p>   
+                            <p>{{item.address_detail}}</p>
                         </div>
                     </div>
                 </li>
@@ -47,7 +47,7 @@
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid">
             <router-view></router-view>
-        </transition>  
+        </transition>
     </div>
 </template>
 
@@ -108,7 +108,7 @@
                     }else{
                         this.deliverdisable.push(item);
                     }
-                    
+
                 })
             },
             iconColor(name){
@@ -124,10 +124,10 @@
         }
     }
 </script>
-  
-<style lang="scss" scoped>
+
+<style lang="scss" rel="stylesheet/scss" scoped>
     @import '../../../style/mixin';
-  
+
     .rating_page{
         position: fixed;
         top: 0;
@@ -136,7 +136,7 @@
         bottom: 0;
         background-color: #f5f5f5;
         z-index: 204;
-        padding-top: 1.95rem;
+        //padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }

@@ -1,11 +1,5 @@
 <template>
   <div class="paddingTop">
-    <!--<head-top goBack="true"></head-top>-->
-    <!--<form class="search_form">-->
-    <!--<input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue"-->
-    <!--@input="checkInput">-->
-    <!--<input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">-->
-    <!--</form>-->
     <form class="search_form">
       <section class="go_back" @click="$router.go(-1)">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -15,9 +9,8 @@
       <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput">
       <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">
     </form>
-
-    <section v-if="restaurantList.length">
-      <h4 class="title_restaurant">商家</h4>
+    <section class="restaurant_list" v-if="restaurantList.length">
+      <!--<h4 class="title_restaurant">商家</h4>-->
       <ul class="list_container">
         <router-link :to="{path:'/shop', query:{id:item.id}}" tag="li" v-for="item in restaurantList" :key="item.id"
                      class="list_li">
@@ -49,7 +42,7 @@
       </ul>
     </section>
     <section class="search_history" v-if="searchHistory.length&&showHistory">
-      <h4 class="title_restaurant">搜索历史</h4>
+      <!--<h4 class="title_restaurant">搜索历史</h4>-->
       <ul>
         <li v-for="(item, index) in searchHistory" :key="index" class="history_list">
           <span class="history_text ellipsis" @click="searchTarget(item)">{{item}}</span>
@@ -196,61 +189,65 @@
     }
   }
 
-  .title_restaurant {
-    font-size: 0.7rem;
-    line-height: 2rem;
-    text-indent: 0.5rem;
-    font-weight: bold;
-    color: #666;
-  }
+  .restaurant_list{
+    padding-top: 2.6rem;
 
-  .list_container {
-    background-color: #fff;
-  }
-
-  .list_li {
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem;
-    border-bottom: 0.025rem solid $bc;
-    .item_left {
-      margin-right: 0.25rem;
-      .restaurant_img {
-        @include wh(1.7rem, 1.7rem);
-      }
+    .title_restaurant {
+      font-size: 0.7rem;
+      line-height: 2rem;
+      text-indent: 0.5rem;
+      font-weight: bold;
+      color: #666;
     }
-    .item_right {
-      font-size: 0.55rem;
-      flex: 1;
-      .item_right_text {
-        padding-bottom: 0.25rem;
-        border-bottom: 0.025rem solid $bc;
-        p {
-          line-height: .9rem;
-        }
-        .pay_icon {
-          margin-bottom: -0.08rem;
+
+    .list_container {
+      background-color: #fff;
+    }
+
+    .list_li {
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+      border-bottom: 0.025rem solid $bc;
+      .item_left {
+        margin-right: 0.25rem;
+        .restaurant_img {
+          @include wh(1.7rem, 1.7rem);
         }
       }
-      .item_right_detail {
-        margin-top: 0.25rem;
-        li {
-          font-size: 0;
-          span {
-            font-size: .5rem;
-            vertical-align: middle;
-            display: inline-block;
-            margin-bottom: 0.2rem;
+      .item_right {
+        font-size: 0.55rem;
+        flex: 1;
+        .item_right_text {
+          padding-bottom: 0.25rem;
+          border-bottom: 0.025rem solid $bc;
+          p {
+            line-height: .9rem;
           }
-          .activities_icon {
-            @include sc(.5rem, #fff);
-            font-weight: bold;
-            padding: .04rem;
-            border-radius: 0.15rem;
-            margin-right: 0.125rem;
+          .pay_icon {
+            margin-bottom: -0.08rem;
           }
-          .only_phone {
-            color: #FF6000;
+        }
+        .item_right_detail {
+          margin-top: 0.25rem;
+          li {
+            font-size: 0;
+            span {
+              font-size: .5rem;
+              vertical-align: middle;
+              display: inline-block;
+              margin-bottom: 0.2rem;
+            }
+            .activities_icon {
+              @include sc(.5rem, #fff);
+              font-weight: bold;
+              padding: .04rem;
+              border-radius: 0.15rem;
+              margin-right: 0.125rem;
+            }
+            .only_phone {
+              color: #FF6000;
+            }
           }
         }
       }
@@ -258,6 +255,8 @@
   }
 
   .search_history {
+    padding-top: 2.6rem;
+
     .history_list {
       background-color: #fff;
       border-bottom: 0.025rem solid $bc;
