@@ -44,16 +44,11 @@
 			</router-link>
 		</ul>
 		<p v-else class="empty_data">没有更多了</p>
-		<!--<aside class="return_top" @click="backTop" v-if="showBackStatus">-->
-			<!--<svg class="back_top_svg">-->
-				<!--<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>-->
-			<!--</svg>-->
-		<!--</aside>-->
-    <div class="back_top_wrapper" @click="backTop" v-if="showBackStatus">
+    <aside class="back_top_wrapper" @click="backTop" v-if="showBackStatus">
       <svg class="back_top_icon">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
       </svg>
-    </div>
+    </aside>
 		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
 		<div ref="abc" style="background-color: red;"></div>
 		<transition name="loading">

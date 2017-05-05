@@ -3,7 +3,7 @@ export const validate_token = {
 };
 
 export const userInfo = {
-	"avatar": "e3c1b9262cfb2c65fa3054d54cfaec54jpeg",
+	"avatar": "a7ca7e9e5aa15b1b8fc6f1bece8ee385jpeg",
 	"balance": 0,
 	"brand_member_new": 0,
 	"column_desc": {
@@ -22,10 +22,10 @@ export const userInfo = {
 	"is_active": 1,
 	"is_email_valid": false,
 	"is_mobile_valid": false,
-	"mobile": "13681711268",
+	"mobile": "15151997619",
 	"point": 0,
 	"user_id": 186655961,
-	"username": "cangdu666"
+	"username": "little bro"
 };
 
 export const checkExsis = {
