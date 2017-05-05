@@ -6,8 +6,8 @@
           <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
         </svg>
       </section>
-      <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput">
-      <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">
+      <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput" @change="searchTarget('')">
+      <!--<input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">-->
     </form>
     <section class="restaurant_list" v-if="restaurantList.length">
       <!--<h4 class="title_restaurant">商家</h4>-->
@@ -171,11 +171,10 @@
 
     .search_input {
       border: 0.025rem solid $bc;
-      @include wh(66%, 1.5rem);
-      @include sc(0.65rem, #333);
-      border-radius: 0.125rem;
+      @include wh(75%, 1.6rem);
+      @include sc(0.6rem, #666);
+      border-radius: 0.96rem;
       background-color: #f2f2f2;
-      font-weight: bold;
       padding: 0 0.25rem;
     }
     .search_submit {

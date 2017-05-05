@@ -23,8 +23,8 @@
 							</section>
 						</section>
 						<section class="rating_order_num_right" v-if="item.delivery_mode">
-							<span class="delivery_style delivery_left">{{item.delivery_mode.text}}</span>
-							<span class="delivery_style delivery_right">准时达</span>
+							<span class="delivery_style delivery_left">准时达</span>
+							<span class="delivery_style delivery_right">{{item.delivery_mode.text}}</span>
 						</section>
 					</h5>
 					<h5 class="fee_distance">
@@ -225,13 +225,13 @@ export default {
 					margin-left: 0.08rem;
 				}
 				.delivery_left{
-					color: #fff;
-					background-color: $blue;
-					border: 0.025rem solid $blue;
+          color: #2395ff;
+          border: 0.025rem solid #44a5ff;
 				}
 				.delivery_right{
-					color: $blue;
-					border: 0.025rem solid $blue;
+          color: #fff;
+          background-color: #2395ff;
+					border: 0.025rem solid #44a5ff;
 				}
 			}
 		}

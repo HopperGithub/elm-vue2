@@ -52,7 +52,7 @@
                                 <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
                             </svg>
                         </section>
-                    </transition>  
+                    </transition>
                 </section>
             </header>
             <section class="change_show_type" ref="chooseType">
@@ -60,7 +60,7 @@
                     <span :class='{activity_show: changeShowType =="food"}' @click="changeShowType='food'">商品</span>
                 </div>
                 <div>
-                    <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>   
+                    <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>
                 </div>
             </section>
             <transition name="fade-choose">
@@ -99,7 +99,7 @@
                                                     <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                                     </li>
                                                 </ul>
-                                                
+
                                             </h3>
                                             <p class="food_description_content">{{foods.description}}</p>
                                             <p class="food_description_sale_rating">
@@ -206,7 +206,7 @@
                                 </p>
                                 <p>
                                     <span>送达时间</span>
-                                    <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>   
+                                    <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>
                                 </p>
                             </section>
                         </header>
@@ -239,7 +239,7 @@
                                     </ul>
                                 </section>
                             </li>
-                        </ul>            
+                        </ul>
                     </section>
                 </section>
             </transition>
@@ -312,11 +312,11 @@
                 'latitude','longitude','cartList'
             ]),
             //商铺公告
-            promotionInfo: function (){ 
+            promotionInfo: function (){
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
             //配送费
-            deliveryFee: function () { 
+            deliveryFee: function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
                 }else{
@@ -324,7 +324,7 @@
                 }
             },
             //还差多少元起送，为负数时显示去结算按钮
-            minimumOrderAmount: function () { 
+            minimumOrderAmount: function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_minimum_order_amount - this.totalPrice;
                 }else{
@@ -455,7 +455,7 @@
                 let newArr = [];
                 let cartFoodNum = 0;
                 //购物车总共的价格
-                this.totalPrice = 0; 
+                this.totalPrice = 0;
                 //购物车中所有商品的详细信息列表
                 this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
@@ -554,7 +554,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" rel="stylesheet/scss" scoped>
     @import '../../style/mixin';
     @keyframes mymove{
        0%   { transform: scale(1) }
@@ -572,7 +572,7 @@
         left: 0;
         height: 100%;
     }
-    
+
     .shop_detail_header{
         overflow: hidden;
         position: relative;
@@ -708,11 +708,11 @@
                     @include cl;
                 }
             }
-            
-            
+
+
         }
     }
-    
+
     .food_container{
         display: flex;
         flex: 1;
@@ -824,7 +824,7 @@
                 padding: .6rem .4rem;
                 border-bottom: 1px solid #f8f8f8;
                 position: relative;
-                overflow: hidden;            
+                overflow: hidden;
                 .menu_detail_link{
                     display:flex;
                     .menu_food_img{
@@ -983,7 +983,7 @@
                     margin-bottom: .1rem;
                 }
                 div:nth-of-type(2){
-                    font-size: .4rem;   
+                    font-size: .4rem;
                 }
             }
         }
@@ -1205,7 +1205,7 @@
                                 display: flex;
                                 align-items: center;
                                 .time_spent_desc{
-                                    @include sc(.55rem, #666)
+                                    @include sc(.55rem, #666);
                                     margin-left: .15rem;
                                 }
                             }
