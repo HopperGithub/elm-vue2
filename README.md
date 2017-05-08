@@ -1,27 +1,28 @@
-# 前言
+### 数据来源
 
-项目不使用模拟数据，所有数据均使用从官网实时获取的真实数据，最大程度实现和官网一样的功能，所以首先遇到的问题是跨域，我们启动本地服务器是获取不到官网数据的，这是跨域的。当然解决的方法很多，jsonp，nginx反向代理，webpack-dev-server的proxy，这里我用的是 http-proxy-middleware 原理都是一样的。
+项目数据是使用 http-proxy-middleware 反向代理解决跨域问题，抓取官网真实数据进行展示，最大限度靠近官网的功能交互。
 
-# 技术栈
-vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+### 技术栈
+vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware 
 
-# 目标功能
+### 目标功能
 - [x] 定位功能 -- 完成
 - [x] 选择城市 -- 完成
 - [x] 搜索地址 -- 完成
-- [x] 展示所选地址附近商家列表 -- 完成
-- [x] 搜索美食，餐馆 -- 完成
-- [x] 根据距离、销量、评分、特色菜、配送方式等进行排序和筛选 -- 完成
+- [x] 天气情况 -- 完成
+- [x] 附近商家列表 -- 完成
+- [x] 搜索商家、商品 -- 完成
+- [x] 对商家、商品排序和筛选 -- 完成
 - [x] 餐馆食品列表页 -- 完成
 - [x] 购物车功能 -- 完成
-- [x] 店铺评价页面 -- 完成
-- [x] 单个食品详情页面 -- 完成
+- [x] 店铺评价页 -- 完成
+- [x] 单个食品详情页 -- 完成
 - [x] 商家详情页 -- 完成
 - [x] 登陆、注册 -- 完成
 - [x] 修改密码 -- 完成
 - [x] 个人中心 -- 完成
 - [x] 发送短信、语音验证 -- 完成
-- [x] 下单功能 -- 完成 ✨✨🎉🎉
+- [x] 下单功能 -- 完成 
 - [x] 订单列表 -- 完成
 - [ ] 订单详情
 - [ ] 帐户信息
@@ -32,7 +33,7 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 - [ ] 付款(很难实现)
 
 
-# 项目布局
+### 项目布局
 ```
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
@@ -125,13 +126,13 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 
 
 
-# 项目运行
+### 项目运行
 ```
 安装依赖
 npm install
 ```
 
-## 编译环境
+### 编译环境
 ```
 
 开启本地服务器
@@ -140,7 +141,7 @@ npm run dev
 访问 http://localhost:8088
 ```
 
-## 线上版本
+### 线上版本
 ```
 npm run build
 
