@@ -14,6 +14,7 @@
     <slot name="hot-search-word"></slot>
     <slot name="changecity"></slot>
     <slot name="changeLogin"></slot>
+    <slot name='search_city'></slot>
   </header>
 </template>
 

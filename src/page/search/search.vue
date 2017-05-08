@@ -6,7 +6,7 @@
           <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
         </svg>
       </section>
-      <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput" @change="searchTarget('')">
+      <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput" @change="searchTarget('')" autofocus>
       <!--<input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">-->
     </form>
     <section class="restaurant_list" v-if="restaurantList.length">

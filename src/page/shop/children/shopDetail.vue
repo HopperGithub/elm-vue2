@@ -41,7 +41,7 @@
             <span class="shop_status_well" v-if="shopDetail.status == 1">良好</span>
             <span class="shop_status_bad" v-else>差</span>
           </p>
-          <p>
+          <p v-if="shopDetail.identification && shopDetail.identification.identificate_date">
             <span>检查日期：</span>
             <span>{{shopDetail.identification.identificate_date.split('T')[0]}}</span>
           </p>

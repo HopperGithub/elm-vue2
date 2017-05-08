@@ -106,14 +106,12 @@ export default {
 <style lang="scss" scoped rel="stylesheet/scss">
     @import '../../style/mixin';
     .head_logo{
-        left: 0.4rem;
         font-weight: 400;
         @include sc(0.7rem, #fff);
         @include wh(2.3rem, 0.7rem);
-        @include ct;
     }
     .city_nav{
-        padding-top: 2.35rem;
+        //padding-top: 2.35rem;
         border-top: 1px solid $bc;
         background-color: #fff;
         margin-bottom: 0.4rem;

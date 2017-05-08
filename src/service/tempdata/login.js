@@ -24,7 +24,7 @@ export const userInfo = {
 	"is_mobile_valid": false,
 	"mobile": "15151997619",
 	"point": 0,
-	"user_id": 186655961,
+	"user_id": 186655962,
 	"username": "little bro"
 };
 

@@ -9,7 +9,6 @@ import * as login from './tempdata/login'
 import * as confirm from './tempdata/confirm'
 import * as order from './tempdata/order'
 
-
 /**
  * 获取首页默认地址
  */
