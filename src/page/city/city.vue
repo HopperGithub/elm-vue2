@@ -1,26 +1,33 @@
 <template>
   <div class="city_container">
-    <head-top :head-title="cityname" go-back='true'>
-      <router-link to="/home" slot="changecity" class="change_city">切换城市</router-link>
+    <head-top :head-title="headerTitle" go-back='true'>
+      <router-link to="/home" slot="changecity" class="change_city" v-if="false">切换城市</router-link>
       <form class="city_form" slot="search_city" @submit.prevent>
         <input type="search" name="city" placeholder="请输入地址" class="city_input" required
                v-model='inputVaule' @change='postpois'>
       </form>
     </head-top>
-    <header v-if="historytitle" class="pois_search_history">搜索历史</header>
-    <ul class="getpois_ul">
-      <li v-for="(item, index) in placelist" @click='nextpage(index, item.geohash)' :key="index">
-        <h4 class="pois_name ellipsis">{{item.name}}</h4>
-        <p class="pois_address ellipsis">{{item.address}}</p>
-      </li>
-    </ul>
-    <div class="search_none_place" v-if="placeNone">很抱歉！无搜索结果</div>
+    <!--<header v-if="historytitle" class="pois_search_history">搜索历史</header>-->
+    <section>
+      <ul class="getpois_ul">
+        <li v-for="(item, index) in placelist" @click='nextpage(index, item.geohash)' :key="index">
+          <h4 class="pois_name ellipsis">{{item.name}}</h4>
+          <p class="pois_address ellipsis">{{item.address}}</p>
+        </li>
+      </ul>
+      <footer v-if="historytitle" class="del_pois_search_history" @click.prevent="clearHistory">删除搜索历史</footer>
+    </section>
+    <section class="search_none_place" v-if="placeNone">
+      <img src="//github.elemecdn.com/eleme/fe-static/master/media/empty/no-shop.png">
+      <h3>没有搜索结果</h3>
+      <p>换个关键字试试</p>
+    </section>
   </div>
 </template>
 
 <script>
   import headTop from '../../components/header/head'
-  import {currentcity, searchplace} from '../../service/getData'
+  import {currentcity, searchplace, search_poi_nearby} from '../../service/getData'
   import {getStore, setStore} from '../../config/mUtils'
 
   export default {
@@ -28,23 +35,25 @@
       return {
         inputVaule: '', // 搜索地址
         cityid: '', // 当前城市id
+        headerTitle: '选择地址', // 当前页面title
         cityname: '', // 当前城市名字
         placelist: [], // 搜索城市列表
         placeHistory: [], // 历史搜索记录
-        historytitle: true, // 默认显示搜索历史头部，点击搜索后隐藏
+        historytitle: false, // 默认显示搜索历史头部，点击搜索后隐藏
         placeNone: false, // 搜索无结果，显示提示信息
       }
     },
 
     mounted(){
-      this.cityid = this.$route.params.cityid;
+      /*this.cityid = this.$route.params.cityid;
       //获取当前城市名字
       currentcity(this.cityid).then(res => {
         this.cityname = res.name;
-      })
+      })*/
       //获取搜索历史记录
       if (getStore('placeHistory')) {
         this.placelist = JSON.parse(getStore('placeHistory'));
+        this.historytitle = this.placelist.length > 0 ? true : false;
       }
     },
 
@@ -59,12 +68,24 @@
       postpois(){
         //输入值不为空时才发送信息
         if (this.inputVaule) {
-          searchplace(this.cityid, this.inputVaule).then(res => {
+          /*searchplace(this.cityid, this.inputVaule).then(res => {
+            this.historytitle = false;
+            this.placelist = res;
+            this.placeNone = res.length ? false : true;
+          });*/
+          search_poi_nearby('', this.inputVaule).then(res => {
             this.historytitle = false;
             this.placelist = res;
             this.placeNone = res.length ? false : true;
           })
         }
+      },
+      //清除所有历史记录
+      clearHistory(){
+        this.placelist = [];
+        this.placeHistory = [];
+        this.historytitle = false;
+        setStore('placeHistory', this.placeHistory);
       },
       /**
        * 点击搜索结果进入下一页面时进行判断是否已经有一样的历史记录
@@ -90,7 +111,7 @@
         }
         setStore('placeHistory', this.placeHistory)
         this.$router.push({path: '/msite', query: {cityid, geohash}})
-      }
+      },
     }
   }
 
@@ -113,11 +134,10 @@
     padding: 0.3rem 0.25rem 0.1rem 0.25rem;
 
       .city_input {
-        text-align: center;
-        padding: 0.25rem;
+        padding: 0.25rem 0.6rem;
         border-radius: .96rem;
         box-shadow: 0 0.026667rem 0.066667rem 0 rgba(0, 0, 0, .2);
-        @include sc(.346667rem, #333);
+        @include sc(.555rem, #333);
         @include wh(100%, 1.35rem);
       }
     }
@@ -126,7 +146,15 @@
     border-top: 1px solid $bc;
     border-bottom: 1px solid $bc;
     padding-left: 0.5rem;
-    @include font(0.475rem, 0.8rem);
+    @include font(0.575rem, 0.8rem);
+  }
+
+  .del_pois_search_history{
+    border-bottom: 1px solid $bc;
+    padding: 0.15rem;
+    text-align: center;
+    font-weight: 400;
+    @include sc(0.675rem, #0096ff);
   }
 
   .getpois_ul {
@@ -134,7 +162,7 @@
     border-top: 1px solid $bc;
     li {
       margin: 0 auto;
-      padding-top: 0.65rem;
+      padding-top: 0.25rem;
       border-bottom: 1px solid $bc;
       .pois_name {
         margin: 0 auto 0.35rem;
@@ -150,10 +178,22 @@
   }
 
   .search_none_place {
+    padding-top: 4rem;
     margin: 0 auto;
-    @include font(0.65rem, 1.75rem);
     color: #333;
-    background-color: #fff;
+    text-align: center;
     text-indent: 0.5rem;
+    img{
+      @include wh(10rem, 5rem);
+    }
+    h3{
+      margin: .333333rem 0 .266667rem;
+      @include sc(0.83rem, #6a6a6a);
+      font-weight: 400;
+    }
+    p{
+      margin: 0 0 .333333rem;
+      @include sc(0.6rem, #999);
+    }
   }
 </style>

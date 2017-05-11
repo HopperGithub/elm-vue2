@@ -6,7 +6,8 @@
           <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
         </svg>
       </section>
-      <input type="search" name="search" placeholder="请输入商品名称" class="search_input" v-model="searchValue" @input="checkInput" @change="searchTarget('')" autofocus>
+      <input type="search" name="search" placeholder="请输入商品名称" class="search_input"
+             v-model="searchValue" @input="checkInput" @change="searchTarget('')" autofocus>
       <!--<input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">-->
     </form>
     <section class="restaurant_list" v-if="restaurantList.length">
@@ -52,9 +53,13 @@
           </svg>
         </li>
       </ul>
-      <footer class="clear_history" @click="clearAllHistory">清空搜索历史</footer>
+      <footer class="clear_history" @click="clearAllHistory">删除搜索历史</footer>
     </section>
-    <div class="search_none" v-if="emptyResult">很抱歉！无搜索结果</div>
+    <section class="search_none_shop" v-if="emptyResult">
+      <img src="//github.elemecdn.com/eleme/fe-static/master/media/empty/no-shop.png">
+      <h3>没有搜索结果</h3>
+      <p>换个关键字试试</p>
+    </section>
     <foot-guide></foot-guide>
   </div>
 </template>
@@ -175,7 +180,7 @@
       @include sc(0.6rem, #666);
       border-radius: 0.96rem;
       background-color: #f2f2f2;
-      padding: 0 0.25rem;
+      padding: 0 0.45rem;
     }
     .search_submit {
       border: 0.025rem solid $bc;
@@ -273,10 +278,10 @@
       }
     }
     .clear_history {
-      background-color: #fff;
-      color: $blue;
-      @include font(.7rem, 2rem);
-      font-weight: bold;
+      @include sc(0.675rem, #0096ff);
+      border-bottom: 1px solid $bc;
+      font-weight: 400;
+      padding: 0.25rem;
       text-align: center;
     }
   }
@@ -288,5 +293,24 @@
     background-color: #fff;
     text-align: center;
     margin-top: 0.125rem;
+  }
+  .search_none_shop{
+    padding-top: 4rem;
+    margin: 0 auto;
+    color: #333;
+    text-align: center;
+    text-indent: 0.5rem;
+    img{
+      @include wh(10rem, 5rem);
+    }
+    h3{
+      margin: .333333rem 0 .266667rem;
+      @include sc(0.83rem, #6a6a6a);
+      font-weight: 400;
+    }
+    p{
+      margin: 0 0 .333333rem;
+      @include sc(0.6rem, #999);
+    }
   }
 </style>

@@ -13,21 +13,21 @@ import * as order from './tempdata/order'
  * 获取首页默认地址
  */
 export const cityGuess = () => fetch('GET', '/v1/cities', {
-	type: 'guess'
+  type: 'guess'
 });
 
 /**
  * 获取首页热门城市
  */
 export const hotcity = () => fetch('GET', '/v1/cities', {
-	type: 'hot'
+  type: 'hot'
 });
 
 /**
  * 获取首页所有城市
  */
 export const groupcity = () => fetch('GET', '/v1/cities', {
-	type: 'group'
+  type: 'group'
 });
 
 /**
@@ -36,12 +36,21 @@ export const groupcity = () => fetch('GET', '/v1/cities', {
 export const currentcity = number => fetch('GET', '/v1/cities/' + number, {});
 
 /**
- * 获取搜索地址
+ * 获取当前城市搜索地址
  */
 export const searchplace = (cityid, value) => fetch('GET', '/v1/pois', {
-	type: 'search',
-	city_id: cityid,
-	keyword: value
+  type: 'search',
+  city_id: cityid,
+  keyword: value
+});
+
+/**
+ * 获取搜索地址
+ */
+export const search_poi_nearby = (offset, value) => fetch('GET', '/bgs/poi/search_poi_nearby', {
+  offset,
+  limit: 20,
+  keyword: value
 });
 
 /**
@@ -53,9 +62,9 @@ export const msiteAdress = geohash => fetch('GET', '/v2/pois/' + geohash, {});
  * 获取msite页面食品分类列表
  */
 export const msiteFoodTypes = geohash => fetch('GET', '/v2/index_entry', {
-	geohash,
-	group_type: '1',
-	'flags[]': 'F'
+  geohash,
+  group_type: '1',
+  'flags[]': 'F'
 });
 
 /**
@@ -78,69 +87,117 @@ export const msiteHotSearchWord = (latitude, longitude) => fetch('GET', 'shoppin
  * 获取msite商铺列表
  */
 export const shopList = (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '', order_by = '', delivery_mode = '', support_ids = []) => {
-	let supportStr = '';
-	support_ids.forEach(item => {
-		if (item.status) {
-			supportStr += '&support_ids[]=' + item.id;
-		}
-	});
-	let data = {
-		latitude,
-		longitude,
-		offset,
-		limit: '20',
-		'extras[]': 'activities',
-		keyword: '',
-		restaurant_category_id,
-		'restaurant_category_ids[]': restaurant_category_ids,
-		order_by,
-		'delivery_mode[]': delivery_mode + supportStr
-	};
-	return fetch('GET', '/shopping/restaurants', data);
+  let supportStr = '';
+  support_ids.forEach(item => {
+    if (item.status) {
+      supportStr += '&support_ids[]=' + item.id;
+    }
+  });
+  let data = {
+    latitude,
+    longitude,
+    offset,
+    limit: '20',
+    'extras[]': 'activities',
+    keyword: '',
+    restaurant_category_id,
+    'restaurant_category_ids[]': restaurant_category_ids,
+    order_by,
+    'delivery_mode[]': delivery_mode + supportStr
+  };
+  return fetch('GET', '/shopping/restaurants', data);
 };
 
 /**
  * 获取search页面搜索结果
  */
 export const searchRestaurant = (geohash, keyword) => fetch('GET', '/v4/restaurants', {
-	'extras[]': 'restaurant_activity',
-	geohash,
-	keyword,
-	type: 'search'
+  'extras[]': 'restaurant_activity',
+  geohash,
+  keyword,
+  type: 'search'
 });
+
+/**
+ * 获取discover页面 member 信息
+ */
+export const discoverMember = (latitude, longitude) => fetch('GET', '/member/v1/discover', {
+  platform: '1',
+  block_index: '0',
+  latitude,
+  longitude
+});
+
+/**
+ * 获取discover页面 美食热推
+ */
+export const discoverLike = (offset, latitude, longitude, request_id, tag_id, columns) => fetch('GET', '/hotfood/v1/guess/likes', {
+  offset,
+  limit: '3',
+  latitude,
+  longitude,
+  request_id,
+  tag_id,
+  columns
+});
+
+/**
+ * 获取discover页面 天天特价
+ */
+export const discoverFood = (offset, latitude, longitude) => fetch('GET', '/shopping/v1/discount/food', {
+  offset,
+  limit: '3',
+  latitude,
+  longitude
+});
+
+/**
+ * 获取discover页面 大家都在吃
+ */
+export const discovernNearByOrders = (offset, latitude, longitude) => fetch('GET', '/marketing/v1/nearby_orders', {
+  offset,
+  limit: '1',
+  latitude,
+  longitude
+});
+
+/**
+ * 获取discover页面 限时好礼
+ */
+export const discoverSuggest = () => fetch('GET', '/member/gifts/suggest');
 
 /**
  * 获取food页面的 category 种类列表
  */
 export const foodCategory = (latitude, longitude) => fetch('GET', '/shopping/v2/restaurant/category', {
-	latitude,
-	longitude
+  latitude,
+  longitude
 });
 
 /**
  * 获取food页面的配送方式
  */
 export const foodDelivery = (latitude, longitude) => fetch('GET', '/shopping/v1/restaurants/delivery_modes', {
-	latitude,
-	longitude,
-	kw: ''
+  latitude,
+  longitude,
+  kw: ''
 });
 
 /**
  * 获取food页面的商家属性活动列表
  */
 export const foodActivity = (latitude, longitude) => fetch('GET', '/shopping/v1/restaurants/activity_attributes', {
-	latitude,
-	longitude,
-	kw: ''
+  latitude,
+  longitude,
+  kw: ''
 });
 
 /**
  * 获取shop页面商铺详情
  */
 export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
-	latitude,
-	longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
+  latitude,
+  longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
 });
 
 
@@ -149,17 +206,17 @@ export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopp
  */
 
 export const foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {
-	restaurant_id
+  restaurant_id
 });
 
 /**
  * 获取商铺评价列表
  */
 export const getRatingList = (offset, tag_name = '') => fetch('GET', '/ugc/v2/restaurants/834828/ratings', {
-	has_content: true,
-	offset,
-	limit: 10,
-	tag_name
+  has_content: true,
+  offset,
+  limit: 10,
+  tag_name
 });
 /**
  * 获取商铺评价分数
@@ -173,9 +230,9 @@ export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid
  * 获取短信验证码
  */
 export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
-	mobile: phone,
-	scene: 'login',
-	type: 'sms'
+  mobile: phone,
+  scene: 'login',
+  type: 'sms'
 });
 /**
  * 手机号登陆
@@ -353,14 +410,13 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 // });
 
 
-
 /**
  * 以下是临时数据
  */
 const setpromise = data => {
-	return new Promise((resolve, reject) => {
-		resolve(data)
-	})
+  return new Promise((resolve, reject) => {
+    resolve(data)
+  })
 }
 
 // export const cityGuess = () => setpromise(home.guesscity);
@@ -394,15 +450,15 @@ export const postAddAddress = (userId, address, address_detail, geohash, name, p
 export const placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => setpromise(confirm.palceOrder);
 export const rePostVerify = (cart_id, sig, type) => setpromise(confirm.verfiyCode);
 export const validateOrders = ({
-	user_id,
-	cart_id,
-	address_id,
-	description,
-	entities,
-	geohash,
-	sig,
-	validation_code,
-	validation_token
+  user_id,
+  cart_id,
+  address_id,
+  description,
+  entities,
+  geohash,
+  sig,
+  validation_code,
+  validation_token
 }) => setpromise(confirm.orderSuccess);
 export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
 export const getOrderList = (user_id, offset) => setpromise(order.orderList);

@@ -2,7 +2,7 @@
   <div>
     <head-top signin-up='msite'>
       <div class="msite-title-row" slot="msite-title-row">
-        <router-link :to="'/city/' + cityid" class="msite-title">
+        <router-link :to="'/city/'" class="msite-title">
           <svg class="location">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location" fill="#fff"></use>
           </svg>
@@ -90,8 +90,8 @@
       }
     },
     async beforeMount(){
-      this.geohash = this.$route.query.geohash || 'wtw3sm0q087';
-      this.cityid = this.$route.query.cityid;
+      this.geohash = this.$route.query.geohash || 'wx4erj2brfud';
+      //this.cityid = this.$route.query.cityid;
       //保存geohash 到vuex
       this.SAVE_GEOHASH(this.geohash);
       //获取位置信息

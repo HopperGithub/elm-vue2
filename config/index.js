@@ -33,7 +33,10 @@ module.exports = {
             '/v3',
             '/v4',
             '/bos',
-            '/bgs'
+            '/bgs',
+            '/member',
+            '/hotfood',
+            '/marketing'
         ],
         proxypath: 'https://mainsite-restapi.ele.me',
         // CSS Sourcemaps off by default because relative paths are "buggy"

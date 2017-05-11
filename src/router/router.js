@@ -27,27 +27,25 @@ const balance = r => require.ensure([], () => r(require('../page/profile/childre
 const benefit = r => require.ensure([], () => r(require('../page/profile/children/benefit')), 'benefit')
 const points = r => require.ensure([], () => r(require('../page/profile/children/points')), 'points')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
-const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
-
-
+const discover = r => require.ensure([], () => r(require('../page/discover/discover')), 'discover')
 
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
     children: [ //二级路由。对应App.vue
-        //地址为空时跳转home页面 
+        //地址为空时跳转home页面
         {
             path: '',
-            redirect: '/home'
+            redirect: '/msite'
         },
         //首页城市列表页
-        {
-            path: '/home',
-            component: home
-        },
+        // {
+        //     path: '/home',
+        //     component: home
+        // },
         //当前选择城市页
         {
-            path: '/city/:cityid',
+            path: '/city',
             component: city
         },
         //所有商铺列表页
@@ -60,12 +58,12 @@ export default [{
             path: '/food',
             component: food
         },
-        //搜索页 
+        //搜索页
         {
             path: '/search/:geohash',
             component: search
         },
-        //商铺详情页 
+        //商铺详情页
         {
             path: '/shop',
             component: shop,
@@ -81,7 +79,7 @@ export default [{
                 }, ]
             }]
         },
-        //确认订单页 
+        //确认订单页
         {
             path: '/confirmOrder',
             component: confirmOrder,
@@ -110,12 +108,12 @@ export default [{
                 }, ]
             }, ]
         },
-        //登陆注册页 
+        //登陆注册页
         {
             path: '/login',
             component: login
         },
-        //个人信息页 
+        //个人信息页
         {
             path: '/profile',
             component: profile,
@@ -136,25 +134,25 @@ export default [{
                 component: service,
             }]
         },
-        //修改密码页 
+        //修改密码页
         {
             path: '/forget',
             component: forget
         },
-        //订单列表页 
+        //订单列表页
         {
             path: '/order',
             component: order
         },
-        //vip卡页   
+        //vip卡页
         {
             path: '/vipcard',
             component: vipcard
         },
         //发现页
         {
-            path: '/find',
-            component: find
+            path: '/discover',
+            component: discover
         },
     ]
 }]

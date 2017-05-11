@@ -49,7 +49,7 @@
           </g>
         </symbol>
 
-        <symbol xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" id="find">
+        <symbol xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" id="discover">
           <defs>
             <path id="discover-regular.8ef537f_a"
                   d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20z"></path>
@@ -67,7 +67,7 @@
           </g>
         </symbol>
 
-        <symbol viewBox="0 0 40 40" id="findActive">
+        <symbol viewBox="0 0 40 40" id="discoverActive">
           <defs>
             <linearGradient id="discover.5811137_a" x1="50%" x2="50%" y1="100%" y2="0%">
               <stop offset="0%" stop-color="#2BAEFF"></stop>
@@ -155,12 +155,12 @@
       </svg>
       <span>外卖</span>
     </section>
-    <section @click="gotoAddress({path: '/search/' + geohash})" class="guide_item">
+    <section @click="gotoAddress({path: '/discover/', query: {geohash}})" class="guide_item">
       <svg class="icon_style">
         <use xmlns:xlink="http://www.w3.org/1999/xlink"
-             :xlink:href="$route.path.indexOf('search') !== -1? '#findActive' : '#find'"></use>
+             :xlink:href="$route.path.indexOf('discover') !== -1? '#discoverActive' : '#discover'"></use>
       </svg>
-      <span>搜索</span>
+      <span>发现</span>
     </section>
     <section @click="gotoAddress('/order')" class="guide_item">
       <svg class="icon_style">
